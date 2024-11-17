@@ -9,7 +9,7 @@ class TradingStrategy(Strategy):
     @property
     def interval(self):
         # Assume daily interval data is sufficent for our analysis
-        return "1day"
+        return "1hour"
 
     @property
     def assets(self):
