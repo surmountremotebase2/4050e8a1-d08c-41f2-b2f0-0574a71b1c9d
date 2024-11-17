@@ -4,7 +4,7 @@ from surmount.logging import log
 
 class TradingStrategy(Strategy):
     def __init__(self):
-        self.tickers = ["AAPL"]
+        self.tickers = ["TSLA"]
 
     @property
     def interval(self):
@@ -17,8 +17,8 @@ class TradingStrategy(Strategy):
 
     def run(self, data):
         # Approximate Fibonacci Retracement logic via EMA comparison
-        short_term_ema = EMA("AAPL", data["ohlcv"], length=8) # More responsive EMA
-        long_term_ema = EMA("AAPL", data["ohlcv"], length=21) # Less responsive EMA
+        short_term_ema = EMA("TSLA", data["ohlcv"], length=8) # More responsive EMA
+        long_term_ema = EMA("TSLA", data["ohlcv"], length=21) # Less responsive EMA
         allocation_ratio = 0
 
         if len(short_term_ema)>0 and len(long_term_ema)>0:
@@ -30,9 +30,9 @@ class TradingStrategy(Strategy):
             # what might be expected after a retracement to the 0.618 Fibonacci level.
             if current_short_term_ema > current_long_term_ema:
                 log("Price potentially rebounding off significant Fibonacci level, considering buy.")
-                allocation_ratio = 1  # Full investment in AAPL
+                allocation_ratio = 1  # Full investment in TSLA
             else:
                 log("Not at Fibonacci retracement level, holding off.")
-                allocation_ratio = 0  # No investment in AAPL
+                allocation_ratio = 0  # No investment in TSLA
 
-        return TargetAllocation({"AAPL": allocation_ratio})
+        return TargetAllocation({"TSLA": allocation_ratio})
