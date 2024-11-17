@@ -1,1 +1,0 @@
-fibonacci_level_0_618
